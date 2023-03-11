@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="style.css">
+  <title>Payment Reminder</title>
+</head>
+
+<body>
+  <!-- Sidebar Start -->
+  <div class="d-flex flex-column flex-shrink-0 bg-light sidebar">
+    <a href="/" class="d-block p-3 link-dark text-decoration-none">
+      <i class="fa fa-wallet d-flex justify-content-center text-primary"></i>
+    </a>
+    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+      <li class="nav-item">
+        <a href="#" class="nav-link active py-3 border-bottom" id="sidebar-home" aria-current="page">
+          <i class="fa fa-home"></i>
+        </a>
+      </li>
+      <li>
+        <button type="button" class="nav-link py-3 border-bottom w-100" id="sidebar-history"
+          onclick="showHistoryModal()">
+          <i class="fa fa-person-circle-question"></i>
+        </button>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link py-3 border-bottom cursor-pointer" id="sidebar-logout" aria-current="page">
+          <i class="fa fa-sign-out"></i>
+        </a>
+      </li>
+    </ul>
+    <div class="border-top">
+      <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none">
+        <img src="" alt="avatar" width="40" height="40" class="rounded-circle" id="account-picture">
+      </a>
+    </div>
+  </div>
+  <!-- Sidebar End -->
+
+  <!-- Dashboard Start -->
+  <section class="dashboard">
+    <div class="row wrapper">
+
+      <!-- Left Section Start -->
+      <div class="section left-section col-lg-3 col-12">
+        <div class="d-flex flex-column h-100">
+
+          <div class="accounts mb-4">
+            <h6 class="section-title">Accounts</h6>
+            <ul id="accounts-list"></ul>
+          </div>
+
+          <div class="categories pt-4 border-top mb-4">
+            <h6 class="section-title">Categories</h6>
+            <ul id="categories-list"></ul>
+            <button class="btn btn-outline-primary mt-3" onclick="showAddCategoryModal()">Add Category</button>
+          </div>
+
+        </div>
+      </div>
+      <!-- Left Section End -->
+
+      <!-- Middle Section Start -->
+      <div class="section middle-section col-lg-6 col-12">
+        <div class="d-flex align-items-center justify-content-between transactions-section-header">
+          <h4 class="section-title animate__animated animate__fadeIn">Daily Transactions</h4>
+          <div class="d-flex gap-4 align-items-center">
+            <input class="input-group form-control text-secondary" id="filter-date" type="date">
+            <button class="rounded-circle btn btn-primary" onclick="showAddTransactionModal()">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <form class="mt-4" id="search-transactions-form">
+          <div class=" d-flex gap-3">
+            <input type="text" placeholder="Search..." class="input-group form-control w-100" name="search">
+            <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-search"></i></button>
+          </div>
+        </form>
+
+        <!-- Transactions List Start -->
+        <div class="transactions mt-4" id="report-section">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="income">
+              <b class="text-secondary animate__animated animate__fadeIn">Total Income</b>
+              <h5 class="text-dark mt-1" id="total-income"></h5>
+            </div>
+            <div class="expense">
+              <b class="text-secondary animate__animated animate__fadeIn">Total Expense</b>
+              <h5 class="text-dark mt-1" id="total-expense"></h5>
+            </div>
+            <div class="total">
+              <b class="text-secondary animate__animated animate__fadeIn">Total</b>
+              <h5 class="text-dark mt-1" id="total"></h5>
+            </div>
+          </div>
+          <hr>
+          <ul class="list-none p-0 m-0" id="transactions-list"></ul>
+        </div>
+        <!-- Transactions List End -->
+
+      </div>
+      <!-- Middle Section End -->
+
+      <!-- Right Section Start -->
+      <div class="section right-section col-lg-3 col-12">
+        <div class="progress p-0 m-0 quote">
+          <div class="progress-bar progress-bar-striped bg-dark p-0 m-0 w-100" role="progressbar"
+            aria-label="Quote Strip" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="quote-shade">
+              <p class="quote-text">
+                <i class="fa fa-quote-left"></i>&nbsp;Money is always eager and ready to work for anyone who is ready to
+                employ it&nbsp;<i class="fa fa-quote-right"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expenses by Category Start -->
+        <div class="expenses-category mt-5">
+          <h6 class="section-title h5">Reports by Category</h6>
+          <div class="expenses-category-list" id="expenses-category-list">
+            <div class="item d-flex justify-content-between align-items-center category-report-wrapper">
+              <div class="d-flex gap-3">
+                <div id="chart-1"></div>
+                <div class="d-flex flex-column">
+                  <p class="text-primary mb-1"><i class="fa fa-hand-holding-dollar"></i></p>
+                  <p class="text-danger mb-1"><i class="fa fa-money-bill-wheat"></i></p>
+                  <p class="text-warning"><i class="fa fa-coins"></i></p>
+                </div>
+              </div>
+              <div class="text-end">
+                <h6 class="m-0" id="chart-1-title">First expensive <br /> category report</h6>
+                <small class="text-secondary p-0 m-0">category report</small>
+              </div>
+            </div>
+            <div class="item d-flex justify-content-between align-items-center category-report-wrapper">
+              <div class="d-flex gap-3">
+                <div id="chart-2"></div>
+                <div class="d-flex flex-column">
+                  <p class="text-primary mb-1"><i class="fa fa-hand-holding-dollar"></i></p>
+                  <p class="text-danger mb-1"><i class="fa fa-money-bill-wheat"></i></p>
+                  <p class="text-warning"><i class="fa fa-coins"></i></p>
+                </div>
+              </div>
+              <div class="text-end">
+                <h6 class="m-0" id="chart-2-title">Second expensive <br /> category report</h6>
+                <small class="text-secondary p-0 m-0">category report</small>
+              </div>
+            </div>
+            <div class="item d-flex justify-content-between align-items-center category-report-wrapper">
+              <div class="d-flex gap-3">
+                <div id="chart-3"></div>
+                <div class="d-flex flex-column">
+                  <p class="text-primary mb-1"><i class="fa fa-hand-holding-dollar"></i></p>
+                  <p class="text-danger mb-1"><i class="fa fa-money-bill-wheat"></i></p>
+                  <p class="text-warning"><i class="fa fa-coins"></i></p>
+                </div>
+              </div>
+              <div class="text-end">
+                <h6 class="m-0" id="chart-3-title">Third expensive <br /> category report</h6>
+                <small class="text-secondary p-0 m-0">category report</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Expenses by Category End -->
+
+      </div>
+      <!-- Right Section End -->
+
+    </div>
+  </section>
+  <!-- Dashboard End -->
+
+  <!-- Modals -->
+  <div class="modal" id="historyModal" tabindex="1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="helpInfo">Help Info</h5>
+          <button type="button" class="btn btn-primary" onclick="showHistoryModal(true)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Payment Reminder is the best place for having all your transactions in one dashboard that makes money management easier. 
+          You can track all the categories with incomes and expenses using Web Ui, by simple adding the date, title and the amount you spent or 
+          you’re planning to do so in the future. It’s always a good idea to manage your assets!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Add Transaction -->
+  <div class="modal" id="addTransactionModal" tabindex="1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addTransactionModalTitle">Add Transaction</h5>
+          <button type="button" class="btn btn-primary" onclick="showAddTransactionModal(true)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="add-transaction-form">
+            <div class="form-group d-flex align-items-center justify-content-between gap-2">
+              <input type="text" class="form-control" placeholder="Enter Title" name="title" required>
+              <input type="date" class="form-control" placeholder="Enter Date" name="date" required>
+            </div>
+            <div class="form-group d-flex align-items-center justify-content-between gap-2 mt-2">
+              <select name="type" class="form-control" placeholder="Select Type" required>
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+              </select>
+              <input type="number" class="form-control" placeholder="Enter Amount" name="amount" required>
+            </div>
+            <div class="form-group d-flex align-items-center justify-content-between gap-2 mt-2">
+              <select name="categoryId" class="form-control" id="add-transaction-category-select"
+                placeholder="Select Category" required>
+                <option value="" disabled selected>Select Category</option>
+              </select>
+            </div>
+            <br />
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                onclick="showAddTransactionModal(true)">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Add Category -->
+  <div class="modal" id="addCategoryModal" tabindex="1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addTransactionModalTitle">Add Category</h5>
+          <button type="button" class="btn btn-primary" onclick="showAddCategoryModal(true)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="add-category-form">
+            <div class="form-group gap-2">
+              <input type="text" class="form-control" placeholder="Enter name" name="name" required>
+            </div>
+            <br />
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                onclick="showAddCategoryModal(true)">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="main.js"></script>
+  <script src="dashboard.js" defer type='module'></script>
+  <script src="transactions.js" defer type='module'></script>
+  <script src="categories.js" defer type='module'></script>
+</body>
+
+</html>

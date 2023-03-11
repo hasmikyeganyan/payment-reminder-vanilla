@@ -1,0 +1,221 @@
+hr {
+  border-top: 0.5px solid !important;
+}
+.progress-bar {
+  white-space: initial !important;
+  padding: 0px 25px !important;
+  background-color: black !important;
+}
+.sidebar {
+  position: fixed;
+  width: 4.5rem;
+  height: 100vh;
+  background: white !important;
+  border-right: 1px solid #dee2e6;
+}
+#historyModal {
+  background: #00000045;
+}
+#addTransactionModal {
+  background: #00000045;
+}
+#addCategoryModal {
+  background: #00000045;
+}
+.dashboard {
+  margin-left: 4.5rem;
+}
+.dashboard .section {
+  padding: 50px 70px 50px 70px;
+}
+.dashboard .section .section-title {
+  padding-bottom: 5px;
+}
+
+.dashboard .left-section {
+  background: rgb(250 250 250);
+}
+
+.dashboard .left-section #accounts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dashboard .left-section #accounts-list li i {
+  font-size: 14px;
+  padding-right: 10px;
+}
+.dashboard .left-section #accounts-list li {
+  margin-bottom: 10px;
+}
+.dashboard .left-section #categories-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dashboard .left-section #categories-list li i {
+  font-size: 14px;
+  padding-right: 10px;
+}
+.dashboard .left-section #categories-list li {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.dashboard #transactions-list {
+  height: 70vh;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.dashboard #transactions-list::-webkit-scrollbar {
+  display: none;
+}
+.dashboard .right-section .quote {
+  height: 150px !important;
+}
+.dashboard .right-section .quote .quote-text {
+  font-size: 16px;
+  padding: 20px;
+  font-weight: 200;
+}
+.dashboard .right-section .quote .quote-shade {
+  background: black;
+}
+.dashboard .right-section .expenses-category .expenses-category-list .item {
+  margin-top: 20px;
+  background: #0e6dfd1a;
+  padding: 15px 20px;
+  border-radius: 5px;
+}
+.dashboard .right-section .expenses-category .expenses-category-list .third {
+  background: #f9f7f6;
+}
+.dashboard .right-section .expenses-category .expenses-category-list .second {
+  background: #1b875417;
+}
+
+/* Media */
+@media (min-width: 992px) {
+  .dashboard .right-section {
+    height: 100vh;
+  }
+  .dashboard .left-section .accounts {
+    height: 6%;
+  }
+  .dashboard .left-section .categories {
+    height: 92%;
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard .section {
+    padding-top: 20px !important;
+  }
+  .dashboard .middle-section .transactions .d-flex {
+    flex-direction: column !important;
+    text-align: center;
+    gap: 20px;
+  }
+  .progress-bar {
+    padding: 0px 14px !important;
+  }
+  .dashboard .right-section .quote .quote-text {
+    font-size: 14px;
+    padding: 15px;
+  }
+  .category-report-wrapper {
+    text-align: center;
+    flex-direction: column;
+  }
+  .category-report-wrapper .text-end {
+    text-align: center !important;
+  }
+  .transactions-section-header {
+    flex-direction: column !important;
+  }
+}
+
+/* Notification */
+.notification-area {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 100;
+}
+.notification {
+  height: 100px;
+  width: 330px;
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 1px solid lightgrey;
+}
+.notification__icon {
+  float: left;
+  height: 40px;
+  width: 50px;
+  position: relative;
+  top: 30px;
+  left: 15px;
+  font-size: 30px;
+  color: #64963b;
+}
+.notification__exit-icon {
+  float: right;
+  height: 16px;
+  top: 10px;
+  right: 15px;
+  position: relative;
+  color: #363636;
+  cursor: pointer;
+}
+.notification__exit-icon:hover {
+  color: #747474;
+}
+.notification__content {
+  float: left;
+  height: 100px;
+  width: 230px;
+  margin: 0 7px;
+  position: relative;
+}
+.notification-title {
+  font-weight: 900;
+  font-size: 20px;
+  margin: 18px 0 0 0;
+  color: #64963b;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+.notification-message {
+  font-weight: 400;
+  margin: 5px 0 0 0;
+  font-size: 14px;
+  font-family: 'Montserrat Alternates', sans-serif;
+  color: #000;
+}
+/* End Notification */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.pie-chart {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+@media (max-width: 600px) {
+  .notification {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+  }
+  .notification-area {
+    top: 0px;
+    left: 0px;
+    margin: 0;
+    width: 100%;
+    max-height: 100px;
+    position: fixed;
+  }
+}
